@@ -1,24 +1,24 @@
 ﻿# Striver A2Z Sheet Problems Solutions Interactive CLI (C# Language)
 
-This project is a **console-based interactive tool** built in C# to help me learn, test, and master the [Strivers A2Z DSA Course](https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2) — a curated set of 450+ Data Structures & Algorithms problems for software engineering interviews.
+This project is a **Console-Based Interactive Tool** built in **C#** to help learn, test, and master the [Strivers A2Z DSA Course](https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2) — a curated set of 450+ Data Structures & Algorithms problems for software engineering interviews.
 
 Instead of solving problems in isolation, I built this CLI to:
 
-- Organize solutions by topic
-- Run any method interactively with custom inputs
-- Repeat tests with smart prompts
-- View clean, formatted outputs for arrays, lists, and nested structures
-- Exit or switch methods mid-loop
-- Scale across folders and namespaces as I progress
+- **Organize solutions by topic**
+- **Run any method interactively with custom inputs**
+- **Repeat tests with smart prompts**
+- **View clean, formatted outputs for arrays, lists, and nested structures**
+- **Exit or switch methods mid-loop**
+- **Scale across folders and namespaces as progress**
 
 This is my **mini project** to demonstrate not just problem-solving, but also:
 
-- Backend design
-- CLI tooling
-- Reflection and dynamic execution
-- Usability and discoverability
-- Automation of developer workflows
-
+- ✅ **Tooling for learning** — built a CLI that automates and streamlines DSA practice
+- ✅ **Modular architecture** — applied reflection, dynamic execution, and clean separation of concerns
+- ✅ **Developer empowerment** — made it plug-and-play for others to extend
+- ✅ **Usability-first design** — smart prompts, escape options, formatted output
+- ✅ **Scalability** — folders, namespaces, discoverability — all future-proofed
+- ✅ **Leadership mindset** — built something that helps others learn, not just myself
 ---
 
 ## 🚀 How It Works
@@ -42,8 +42,8 @@ This is my **mini project** to demonstrate not just problem-solving, but also:
 - ✅ Modular architecture for easy extension
 - ✅ Clean separation of logic (`DSARunner`, `InputHelper`, etc.)
 
-> ⚠️ **Note:** This project is a work in progress. I'm actively implementing and testing solutions from the [Striver SDE Sheet](https://takeuforward.org/interviews/strivers-sde-sheet-top-coding-interview-questions/). New problems will be added regularly.  
-> 📌 Track my progress in the [Pinned Issue Tracker](https://github.com/your-username/your-repo/issues/1)
+> ⚠️ **Note:** This project is a work in progress. I'm actively implementing and testing solutions from the [Strivers A2Z DSA Course](https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2). New problems will be added regularly.  
+> 📌 Track my progress in the [Pinned Issue Tracker](https://github.com/Sumana-Das/StriverA2Z_DSA_Course/issues/1)
 
 ---
 
@@ -52,11 +52,8 @@ This is my **mini project** to demonstrate not just problem-solving, but also:
 | Topic         | Class Name       | Path                                      |
 |---------------|------------------|-------------------------------------------|
 | Basics        | `BasicMaths`     | [`/Basics/BasicMaths.cs`](./Basics/BasicMaths.cs) |
-| Recursion     | `Recursion`      | [`/Basics/Recursion.cs`](./Basics/Recursion.cs)    |
-| Patterns      | `Patterns`       | [`/Basics/Patterns.cs`](./Basics/Patterns.cs)      |
-| Arrays        | `ArrayProblems`  | [`/Arrays/ArrayProblems.cs`](./Arrays/ArrayProblems.cs) *(example)*
-| Sorting       | `SortingUtils`   | [`/Sorting/SortingUtils.cs`](./Sorting/SortingUtils.cs) *(example)*
-| Dynamic Prog. | `DPProblems`     | [`/DP/DPProblems.cs`](./DP/DPProblems.cs) *(example)*
+| Basics        | `Recursion`      | [`/Basics/Recursion.cs`](./Basics/Recursion.cs)    |
+| Basics        | `Patterns`       | [`/Basics/Patterns.cs`](./Basics/Patterns.cs)      |
 
 > Each class contains public methods that solve one or more problems from the [Strivers A2Z DSA Course](https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2)
 
@@ -67,7 +64,7 @@ This is my **mini project** to demonstrate not just problem-solving, but also:
 ```plaintext
 Available DSA Classes:
   [0] Recursion
-  [1] ArrayProblems
+  [1] Hashing
 Enter class index to explore: 0
 
 Methods in Recursion:
@@ -82,19 +79,13 @@ Enter method index to run: 0
 ```
 
 ## 🛠️ How to Extend
-This CLI is designed to be plug-and-play for anyone learning DSA or building their own problem sets.
-
-Add new classes under topic folders (e.g., /Graphs, /Stacks)
-
-Write your own methods using public instance signatures
-
-Modify existing methods to experiment with logic or edge cases
-
-No need to register or configure anything — just run the app and your changes will appear automatically
-
-Return types like List<int>, List<List<int>>, int[], etc. are auto-formatted for readability
-
-Add XML comments for method summaries (optional)
+- ✅ This CLI is designed to be plug-and-play for anyone learning DSA or building their own problem sets.
+- ✅ Add new classes under topic folders (e.g., /Graphs, /Stacks)
+- ✅ Write your own methods using public instance signatures
+- ✅ Modify existing methods to experiment with logic or edge cases
+- ✅ No need to register or configure anything — just run the app and your changes will appear automatically
+- ✅ Return types like List<int>, List<List<int>>, int[], etc. are auto-formatted for readability
+- ✅ Add XML comments for method summaries (optional)
 
 ## 🤝 For Contributors & Learners
 Whether you're solving the Striver SDE Sheet or building your own problem bank, this tool is built to support your workflow:
