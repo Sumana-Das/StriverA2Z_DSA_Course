@@ -18,6 +18,11 @@
             // }
             return count;
         }
+        /// <summary>
+        /// https://leetcode.com/problems/reverse-integer/description/
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
         public int ReverseNumber(int n)
         {
             int rev = 0;
@@ -29,11 +34,21 @@
             }
             return rev;
         }
+        /// <summary>
+        /// https://leetcode.com/problems/palindrome-number/description/
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
         public bool IsPalindrome(int n)
         {
             int rev = ReverseNumber(n);
             return n == rev;
         }
+        /// <summary>
+        /// https://leetcode.com/problems/armstrong-number/description/
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
         public bool IsArmstrong(int n)
         {
             int count = (int)Math.Log10(n) + 1;

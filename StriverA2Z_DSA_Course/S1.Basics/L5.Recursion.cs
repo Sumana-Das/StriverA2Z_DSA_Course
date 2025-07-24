@@ -148,6 +148,11 @@
                 return 1;
             return n * FactorialFunction(n - 1);
         }
+        /// <summary>
+        /// https://leetcode.com/problems/valid-palindrome/description/
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public bool IsPalindrome(string s)
         {
             return IsPalindrome(0, s);
@@ -164,6 +169,7 @@
         /// <summary>
         /// Time Complexity = 2^n (exponential)
         /// Space Complexity = 2^n
+        /// https://leetcode.com/problems/fibonacci-number/description/
         /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>

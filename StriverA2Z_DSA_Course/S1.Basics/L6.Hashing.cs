@@ -70,5 +70,59 @@ namespace StriverA2Z_DSA_Course.Basics
             }
             return lists;
         }
+        /// <summary>
+        /// Get the Element which occurred maximum times
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        public int MostFrequentElement(int[] arr)
+        {
+            IDictionary<int, int> dict = new Dictionary<int, int>();
+            int maxFreq = MaxFrequency(arr, dict);
+            int mostFreq = 0;
+
+            foreach(var kvp in dict)
+            {
+                if ((kvp.Value == maxFreq && mostFreq == 0) || (kvp.Value == maxFreq && mostFreq > kvp.Key))
+                    mostFreq = kvp.Key;
+            }
+            return mostFreq;
+        }
+        /// <summary>
+        /// Get the count of the elements which occured maximum times
+        /// https://leetcode.com/problems/count-elements-with-maximum-frequency/
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        public int MaxFrequencyElements(int[] arr)
+        {
+            IDictionary<int, int> dict = new Dictionary<int, int>();
+            int maxFreq = MaxFrequency(arr, dict);
+            int mostFreq = 0;
+
+            foreach (var kvp in dict)
+            {
+                if (kvp.Value == maxFreq)
+                    mostFreq++;
+            }
+            return mostFreq * maxFreq;
+        }
+        private int MaxFrequency(int[] arr, IDictionary<int, int> dict)
+        {
+            int maxFreq = 0;
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (dict.ContainsKey(arr[i]))
+                    dict[arr[i]]++;
+                else
+                    dict.Add(arr[i], 1);
+            }
+            foreach (var kvp in dict)
+            {
+                maxFreq = Math.Max(maxFreq, kvp.Value);
+            }
+            return maxFreq;
+        }
     }
 }
