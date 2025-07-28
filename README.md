@@ -51,9 +51,11 @@ This is my **mini project** to demonstrate not just problem-solving, but also:
 
 | Topic         | Class Name       | Path                                      |
 |---------------|------------------|-------------------------------------------|
-| Basics        | `BasicMaths`     | [`/Basics/BasicMaths.cs`](./Basics/BasicMaths.cs) |
-| Basics        | `Recursion`      | [`/Basics/Recursion.cs`](./Basics/Recursion.cs)    |
-| Basics        | `Patterns`       | [`/Basics/Patterns.cs`](./Basics/Patterns.cs)      |
+| Basics        | `Patterns`       | [`/Basics/Patterns.cs`](./Basics/L2.Patterns.cs)      |
+| Basics        | `BasicMaths`     | [`/Basics/BasicMaths.cs`](./Basics/L4.BasicMaths.cs) |
+| Basics        | `Recursion`      | [`/Basics/Recursion.cs`](./Basics/L5.Recursion.cs)    |
+| Basics        | `Hashing`        | [`/Basics/Hashing.cs`](./Basics/L6.Hashing.cs)    |
+| Recursion     |  `Subsequences`  | [`/AdvancedRecursion/Subsequences.cs`](./AdvancedRecursion/L2.Subsequences.cs)   |
 
 > Each class contains public methods that solve one or more problems from the [Strivers A2Z DSA Course](https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2)
 
