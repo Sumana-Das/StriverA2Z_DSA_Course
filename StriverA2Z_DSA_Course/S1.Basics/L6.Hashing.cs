@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StriverA2Z_DSA_Course.Basics
+﻿namespace StriverA2Z_DSA_Course.Basics
 {
     public class Hashing
     {
