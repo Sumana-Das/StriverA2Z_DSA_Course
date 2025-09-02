@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Numerics;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Channels;
@@ -155,11 +156,11 @@ namespace StriverA2Z_DSA_Course.S7.AdvancedRecursion
 
             sum += nums[idx];
             // it could get/not get any subset from left recursion
-            int l = CountSubsetsWithSumK(nums, k, idx, sum);
+            int l = CountSubsetsWithSumK(nums, k, idx + 1, sum);
             sum -= nums[idx];
 
             // it could get/not get any subset from right recursion
-            int r = CountSubsetsWithSumK(nums, k, idx, sum);
+            int r = CountSubsetsWithSumK(nums, k, idx + 1, sum);
 
             return l + r;
         }
@@ -434,5 +435,138 @@ namespace StriverA2Z_DSA_Course.S7.AdvancedRecursion
             }
             
         }
-    }
+
+        #region Microsoft Questions with backtracking (Not Striver's List)
+        private static int maxMinCost = 0;
+
+        /// <summary>
+        /// Question1: You are given two arrays, firstShop, and secondShop, representing the prices of n items
+        /// in two different shops. Your task is to select exactly k indices (same indices for both shops) 
+        /// such that the minimum total cost between the two shops for the selected items is as large as possible. 
+        /// Each item is associated with two costs: one from firstShop and one from secondShop. 
+        /// The selection must be consistent across both shops: if index i is selected, 
+        /// it contributes its cost from both arrays to the respective sums. 
+        /// Example n=5, k=3 firstShop = [6, 3, 6, 5, 1] secondShop = [1, 4, 5, 9, 2] 
+        /// Optimally, choose the subset of indices as (0, 2, 3). The value is min(6 + 6 + 5, 1 + 5 + 9) = 15, 
+        /// which is the maximum possible. Return 15 as the answer.
+        /// </summary>
+        /// <param name="firstShop"></param>
+        /// <param name="secondShop"></param>
+        /// <param name="k"></param>
+        /// <returns>maxMinCost - an integer</returns>
+        public static int MaximizeMinimumCost(int[] firstShop, int[] secondShop, int k)
+        {
+            maxMinCost = 0;
+            Backtrack(firstShop, secondShop, k, 0, 0, 0, 0);
+            return maxMinCost;
+        }
+
+        // Backtracking without storing combinations
+        private static void Backtrack(int[] firstShop, int[] secondShop, int k, int index, int count, int totalFirst, int totalSecond)
+        {
+            if (count == k)
+            {
+                maxMinCost = Math.Max(maxMinCost, Math.Min(totalFirst, totalSecond));
+                return;
+            }
+
+            if (index >= firstShop.Length) return;
+
+            // Prune: not enough items left to reach k
+            if (count + (firstShop.Length - index) < k) return;
+
+            // Option 1: Include current index
+            Backtrack(firstShop, secondShop, k, index + 1, count + 1, totalFirst + firstShop[index], totalSecond + secondShop[index]);
+
+            // Option 2: Skip current index
+            Backtrack(firstShop, secondShop, k, index + 1, count, totalFirst, totalSecond);
+        }
+
+        /// <summary>
+        /// Question 2: Gridland is a 2D world divided into cells, with each cell represented by coordinates (x, y) 
+        /// where (0, 0) is the top-left corner. From any cell (x, y), a resident can move either horizontally or vertically
+        /// to an adjacent cell, i.e., (x + 1, y) or (x y + 1). Each possible minimum path is a sequence of horizontal and vertical moves
+        /// denoted by the characters H and V. For instance, the path 'HVHV' describes the sequence of moves
+        /// from (0, 0) to (2, 2) as horizontal → vertical→ horizontal → vertical. 
+        /// A specific path through Gridland must be identified. Start by generating all possible paths 
+        /// from the origin to the target location, represented as strings of H and V. Order these strings 
+        /// in alphabetically ascending order. Return the path at the zero- based index position of 
+        /// a given key value, the safe path. Function Description Complete the function getSafePaths 
+        /// in the editor with the following parameter(s): string journeys[n]: an array of strings of 
+        /// three space-separated integers, x, y and k • (x, y): destination cell from (0,0) k: the key index value 
+        /// Returns: string[n]: an array of paths where each element i contains the path string for journey[i].
+        /// </summary>
+        /// <param name="journeys"></param>
+        /// <returns>result - a list of strings</returns>
+        public static List<string> GetSafePaths(string[] journeys)
+        {
+            var result = new List<string>();
+
+            foreach (var journey in journeys)
+            {
+                var parts = journey.Split(' ');
+                int x = int.Parse(parts[0]);
+                int y = int.Parse(parts[1]);
+                int k = int.Parse(parts[2]);
+
+                result.Add(ConstructKthPath(x, y, k));
+            }
+
+            return result;
+        }
+
+        // Construct the k-th lexicographical path using combinatorics
+        private static string ConstructKthPath(int h, int v, int k)
+        {
+            var path = new List<char>();
+
+            while (h > 0 || v > 0)
+            {
+                if (h == 0)
+                {
+                    path.Add('V');
+                    v--;
+                }
+                else if (v == 0)
+                {
+                    path.Add('H');
+                    h--;
+                }
+                else
+                {
+                    int countHFirst = Binomial(h + v - 1, h - 1);
+                    if (k < countHFirst)
+                    {
+                        path.Add('H');
+                        h--;
+                    }
+                    else
+                    {
+                        path.Add('V');
+                        k -= (int)countHFirst;
+                        v--;
+                    }
+                }
+            }
+
+            return new string(path.ToArray());
+        }
+
+        // Efficient binomial coefficient calculator
+        private static int Binomial(int n, int k)
+        {
+            if (k < 0 || k > n) return 0;
+            if (k == 0 || k == n) return 1;
+
+            int res = 1;
+            for (int i = 1; i <= k; i++)
+            {
+                res *= n - (i - 1);
+                res /= i;
+            }
+            return res;
+        }
+
+    #endregion
+}
 }
