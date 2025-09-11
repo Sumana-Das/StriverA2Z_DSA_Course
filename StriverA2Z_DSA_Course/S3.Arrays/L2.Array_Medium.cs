@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,229 @@ namespace StriverA2Z_DSA_Course.S3.Arrays
                 }
             }
             return new int[] { };
+        }
+        /// <summary>
+        /// https://leetcode.com/problems/sort-colors/
+        /// Brute Force: using dictionary
+        /// Optimal Intuition: 2s should be at last and 0s are at first, so using 2 pointer and pivot pointer check for 0s or 1s
+        /// if found swap, in that case 1s will be at the middle only, thats why pivot is used
+        /// soleft side of pivot is 1s and right side of pivot is 2s
+        /// </summary>
+        /// <param name="nums"></param>
+        public void SortColors(int[] nums)
+        {
+            int left = 0;
+            int right = nums.Length - 1;
+            int pivot = 0;
+
+            while (pivot <= right)
+            {
+                if (nums[pivot] == 0)
+                {
+                    int temp = nums[left];
+                    nums[left] = nums[pivot];
+                    nums[pivot] = temp;
+
+                    left++;
+                    pivot++;
+                }
+                else if (nums[pivot] == 1)
+                {
+                    pivot++;
+                }
+                else
+                {
+                    int temp = nums[pivot];
+                    nums[pivot] = nums[right];
+                    nums[right] = temp;
+
+                    right--;
+                }
+            }
+        }
+        /// <summary>
+        /// https://leetcode.com/problems/majority-element/
+        /// using Moore's Voting algorithm - get the majority possible element
+        /// this algo says pick an element and increase count if you get the same if not then decrease count
+        /// if the count becomes zero then pick at that position element and repeat the process
+        /// by this we will get a possible majority element
+        /// then verify whether its majority or not
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int MajorityElement(int[] nums)
+        {
+            int element = -1;
+            int count = 0;
+
+            // Moore's Voting algorithm
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (count == 0)
+                {
+                    element = nums[i];
+                    count++;
+                }
+                else if (element == nums[i])
+                {
+                    count++;
+                }
+                else
+                {
+                    count--;
+                }
+            }
+            // verify whether its majority or not
+            count = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] == element)
+                {
+                    count++;
+                }
+            }
+            if (count > nums.Length / 2)
+                return element;
+            return -1;
+        }
+        /// <summary>
+        /// https://leetcode.com/problems/maximum-subarray/description/
+        /// Similar to longest subarray sum in easy problem but here need to find the sum
+        /// using Kadane's Algorithm - this states take the sum and compare with max sum
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int MaximumSubArraySum(int[] nums)
+        {
+            int sum = 0;
+            int maxSum = Int32.MaxValue;
+            int startIdx = -1, endIdx = -1, start = -1;
+
+            for(int i = 0; i < nums.Length; i++)
+            {
+                if(sum == 0)
+                {
+                    start = i;
+                }
+                sum += nums[i];
+
+                if(maxSum < sum)
+                {
+                    maxSum = sum;
+                    startIdx = start;
+                    endIdx = i;
+                }
+
+                if(sum < 0)
+                {
+                    sum = 0;
+                }
+            }
+            Console.WriteLine($"Subarray {startIdx} - {endIdx}");
+            return maxSum;
+        }
+        /// <summary>
+        /// https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+        /// Kadane's Algorithm
+        /// </summary>
+        /// <param name="prices"></param>
+        /// <returns></returns>
+        public int MaxProfit(int[] prices)
+        {
+            int buyPrice = prices[0];
+            int profit = 0;
+            int maxProfit = 0;
+
+            for(int i = 1; i < prices.Length; i++)
+            {
+                profit = prices[i] - buyPrice;
+
+                maxProfit = Math.Max(maxProfit, profit);
+
+                if(profit < 0)
+                {
+                    buyPrice = prices[i];
+                }
+            }
+
+            return maxProfit;
+        }
+        /// <summary>
+        /// https://leetcode.com/problems/rearrange-array-elements-by-sign/
+        /// when positive and negative values are same, means +ve = n/2 and -ve= n/2, so array should be even length
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int[] RearrangeArray(int[] nums)
+        {
+            int[] res = new int[nums.Length];
+            int pos = 0, neg = 1;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] < 0)
+                {
+                    res[neg] = nums[i];
+                    neg = neg + 2;
+                }
+                else
+                {
+                    res[pos] = nums[i];
+                    pos = pos + 2;
+                }
+            }
+            return res;
+        }
+        /// <summary>
+        /// when positive and negative value counts are not same, means the array could be of any length
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int[] RearrangeInEqualArray(int[] nums)
+        {
+            IList<int> pos = new List<int>();
+            IList<int> neg = new List<int>();
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] > 0)
+                {
+                    pos.Add(nums[i]);
+                }
+                if (nums[i] < 0)
+                {
+                    neg.Add(nums[i]);
+                }
+            }
+            if(pos.Count > neg.Count)
+            {
+                for(int i = 0; i < neg.Count; i++)
+                {
+                    nums[i * 2] = pos[i];
+                    nums[i * 2 + 1] = neg[i];
+                }
+                int idx = neg.Count * 2;
+                for(int i = neg.Count; i < pos.Count; i++)
+                {
+                    nums[idx] = pos[i];
+                    idx++;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < pos.Count; i++)
+                {
+                    nums[i * 2] = pos[i];
+                    nums[i * 2 + 1] = neg[i];
+                }
+                int idx = pos.Count * 2;
+                for (int i = pos.Count; i < neg.Count; i++)
+                {
+                    nums[idx] = neg[i];
+                    idx++;
+                }
+            }
+            return nums;
         }
         /// <summary>
         /// https://leetcode.com/problems/search-a-2d-matrix/

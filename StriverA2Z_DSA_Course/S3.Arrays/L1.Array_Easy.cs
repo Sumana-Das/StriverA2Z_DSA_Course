@@ -337,15 +337,19 @@ namespace StriverA2Z_DSA_Course.S3.Arrays
                 {
                     len = Math.Max(len, i - dict[prefixSum - k]);
                 }
-                if (!dict.ContainsKey(prefixSum))
+                else
                 {
-                    dict.Add(prefixSum, i);
+                    if (!dict.ContainsKey(prefixSum))
+                    {
+                        dict.Add(prefixSum, i);
+                    }
                 }
             }
             return len;
         }
         /// <summary>
-        /// Find the longest subarray whose sum is k, array can only have +ve                           
+        /// Find the longest subarray whose sum is k, array can only have +ve
+        /// Sliding window
         /// <param name="arr"></param>
         /// <param name="k"></param>
         /// <returns></returns>
