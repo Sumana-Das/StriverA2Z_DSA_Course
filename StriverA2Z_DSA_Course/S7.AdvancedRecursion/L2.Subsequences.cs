@@ -164,14 +164,6 @@ namespace StriverA2Z_DSA_Course.S7.AdvancedRecursion
 
             return l + r;
         }
-        public IList<IList<int>> CombinationSumI(int[] nums, int target)
-        {
-            IList<IList<int>> allSubsets = new List<IList<int>>();
-            IList<int> subset = new List<int>();
-
-            CombinationSumI(nums, allSubsets, subset, target, 0);
-            return allSubsets;
-        }
         /// <summary>
         /// https://leetcode.com/problems/combination-sum/description/
         /// Combinations of subsets and picking an item multiple times
@@ -184,6 +176,14 @@ namespace StriverA2Z_DSA_Course.S7.AdvancedRecursion
         /// <param name="k"></param>
         /// <param name="idx"></param>
         /// <param name="sum"></param>
+        public IList<IList<int>> CombinationSumI(int[] nums, int target)
+        {
+            IList<IList<int>> allSubsets = new List<IList<int>>();
+            IList<int> subset = new List<int>();
+
+            CombinationSumI(nums, allSubsets, subset, target, 0);
+            return allSubsets;
+        }
         private void CombinationSumI(int[] nums, IList<IList<int>> allSubsets, IList<int> subset, int target, int idx)
         {
             if (idx == nums.Length)

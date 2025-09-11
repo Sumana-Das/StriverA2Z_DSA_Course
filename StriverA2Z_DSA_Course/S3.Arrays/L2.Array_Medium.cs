@@ -259,6 +259,85 @@ namespace StriverA2Z_DSA_Course.S3.Arrays
             }
             return nums;
         }
+        public void NextPermutation(int[] nums)
+        {
+            int n = nums.Length;
+            int breakPoint = -1;
+
+            // Step 1: find the break point where nums[i] < nums[i + 1]
+            for (int i = n - 2; i >= 0; i--)
+            {
+                if (nums[i] < nums[i + 1])
+                {
+                    breakPoint = i;
+                    break;
+                }
+            }
+            //edge case: where no breakpoint found means the array is in decreasing order, means it reached to the last combination, now to get next combination it should be the 1st sorted order, so just reverse it
+            if (breakPoint == -1)
+            {
+                Reverse(nums, 0, n - 1);
+                return;
+            }
+
+            // Step 2: find the element who is greater than the pivot value but less than the other elements after the breakpoint till rest values, and then swap it simply
+            for (int i = n - 1; i > breakPoint; i--)
+            {
+                if (nums[i] > nums[breakPoint])
+                {
+                    Swap(nums, breakPoint, i);
+                    break;
+                }
+            }
+            // Step 3: the rest of the array after the breakPoint should be in sorted order, here reverse would work as after the breakpoint all are in decresing order
+            Reverse(nums, breakPoint + 1, n - 1);
+        }
+        private void Reverse(int[] nums, int start, int end)
+        {
+            while (start <= end)
+            {
+                int k = nums[start];
+                nums[start] = nums[end];
+                nums[end] = k;
+
+                start++;
+                end--;
+            }
+        }
+        private void Swap(int[] nums, int i, int j)
+        {
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+        }
+        /// <summary>
+        /// https://leetcode.com/problems/longest-consecutive-sequence/
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int LongestConsecutive(int[] nums)
+        {
+            int lastElement = Int32.MinValue;
+            int count = 0;
+            Array.Sort(nums);
+            int longest = 0;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (lastElement == nums[i] - 1)
+                {
+                    lastElement = nums[i];
+                    count++;
+                }
+                else if (lastElement != nums[i])
+                {
+                    lastElement = nums[i];
+                    count = 1;
+                }
+                longest = Math.Max(longest, count);
+            }
+            return longest;
+        }
         /// <summary>
         /// https://leetcode.com/problems/search-a-2d-matrix/
         /// Intuition: flatten the array in mind and try binary search
@@ -304,7 +383,7 @@ namespace StriverA2Z_DSA_Course.S3.Arrays
 
             int max = Int32.MinValue;
 
-            for(int i = 0; i <= 0; i++)
+            for(int i = 0; i < arr.Length; i++)
             {
                 if (arr[i] > max)
                 {
