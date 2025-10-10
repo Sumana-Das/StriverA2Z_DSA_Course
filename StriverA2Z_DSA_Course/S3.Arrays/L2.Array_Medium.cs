@@ -184,7 +184,7 @@ namespace StriverA2Z_DSA_Course.S3.Arrays
         }
         /// <summary>
         /// https://leetcode.com/problems/rearrange-array-elements-by-sign/
-        /// when positive and negative values are same, means +ve = n/2 and -ve= n/2, so array should be even length
+        /// when positive and negative values are of same count, means +ve = n/2 and -ve= n/2, so array should be even length
         /// </summary>
         /// <param name="nums"></param>
         /// <returns></returns>
@@ -264,7 +264,8 @@ namespace StriverA2Z_DSA_Course.S3.Arrays
             int n = nums.Length;
             int breakPoint = -1;
 
-            // Step 1: find the break point where nums[i] < nums[i + 1]
+            // Step 1: find the break point where nums[i] < nums[i + 1],
+            // starting from end of the array
             for (int i = n - 2; i >= 0; i--)
             {
                 if (nums[i] < nums[i + 1])
@@ -273,14 +274,18 @@ namespace StriverA2Z_DSA_Course.S3.Arrays
                     break;
                 }
             }
-            //edge case: where no breakpoint found means the array is in decreasing order, means it reached to the last combination, now to get next combination it should be the 1st sorted order, so just reverse it
+            // edge case: where no breakpoint found means the array is in decreasing order,
+            // means it reached to the last combination, now to get next combination it should be
+            // the 1st sorted order, so just reverse it
             if (breakPoint == -1)
             {
                 Reverse(nums, 0, n - 1);
                 return;
             }
 
-            // Step 2: find the element who is greater than the pivot value but less than the other elements after the breakpoint till rest values, and then swap it simply
+            // Step 2: find the element who is greater than the breakPoint value
+            // but less than the other elements after the breakpoint till rest values,
+            // and then swap it simply
             for (int i = n - 1; i > breakPoint; i--)
             {
                 if (nums[i] > nums[breakPoint])
@@ -289,7 +294,8 @@ namespace StriverA2Z_DSA_Course.S3.Arrays
                     break;
                 }
             }
-            // Step 3: the rest of the array after the breakPoint should be in sorted order, here reverse would work as after the breakpoint all are in decresing order
+            // Step 3: the rest of the array after the breakPoint should be in sorted order,
+            // here reverse would work as after the breakpoint all are in decresing order
             Reverse(nums, breakPoint + 1, n - 1);
         }
         private void Reverse(int[] nums, int start, int end)
