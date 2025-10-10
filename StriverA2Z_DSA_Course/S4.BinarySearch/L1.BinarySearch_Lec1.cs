@@ -342,8 +342,8 @@ namespace StriverA2Z_DSA_Course.S4.BinarySearch
 
                 if (nums[mid] != nums[mid + 1] && nums[mid] != nums[mid - 1])
                     return nums[mid];
-                // check if mid value is same as mid  - 1 value and mid is at odd or mid value is same as mid + 1 value and mid is at even
-                // that means hte value should be at right side
+                // check if mid value is same as mid - 1 value and mid is at odd or mid value is same as mid + 1 value and mid is at even
+                // that means the value should be at right side
                 if ((nums[mid] == nums[mid - 1] && mid % 2 == 1) || (nums[mid] == nums[mid + 1] && mid % 2 == 0))
                 {
                     left = mid + 1;
