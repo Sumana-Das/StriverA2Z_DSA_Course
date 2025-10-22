@@ -345,40 +345,6 @@ namespace StriverA2Z_DSA_Course.S3.Arrays
             return longest;
         }
         /// <summary>
-        /// https://leetcode.com/problems/search-a-2d-matrix/
-        /// Intuition: flatten the array in mind and try binary search
-        /// </summary>
-        /// <param name="matrix"></param>
-        /// <param name="target"></param>
-        /// <returns></returns>
-        public bool SearchMatrix(int[][] matrix, int target)
-        {
-            int n = matrix.Length;
-            int m = matrix[0].Length;
-            int left = 0, right = n * m - 1;
-
-            while (left <= right)
-            {
-                int mid = (left + right) / 2;
-                int row = mid / m; // row is multiple of col length
-                int col = mid % m; // col is remainder of the division with col length
-
-                if (matrix[row][col] == target)
-                {
-                    return true;
-                }
-                else if (matrix[row][col] < target)
-                {
-                    left = mid + 1;
-                }
-                else if (matrix[row][col] > target)
-                {
-                    right = mid - 1;
-                }
-            }
-            return false;
-        }
-        /// <summary>
         /// Find the elements whose right side items are greater than that
         /// </summary>
         /// <param name="arr"></param>
@@ -498,6 +464,97 @@ namespace StriverA2Z_DSA_Course.S3.Arrays
                     end--;
                 }
             }
+        }
+        /// <summary>
+        /// https://leetcode.com/problems/set-matrix-zeroes/
+        /// </summary>
+        /// <param name="matrix"></param>
+        public void SetZeroes(int[][] matrix)
+        {
+            bool has1stRowZero = false;
+            bool has1stColZero = false;
+
+            // identify cells with are zero and then mark the 1st row cell or col cell to zero,
+            // but if the cell with zero is in the 1st row orcol then assign two bool value and set them to true
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                for (int j = 0; j < matrix[0].Length; j++)
+                {
+                    if (matrix[i][j] == 0)
+                    {
+                        if (i == 0)
+                            has1stRowZero = true;
+                        if (j == 0)
+                            has1stColZero = true;
+
+                        matrix[i][0] = 0;
+                        matrix[0][j] = 0;
+                    }
+                }
+            }
+            // once the marking done then fnd the 1st row and 1col cells which were marked 0
+            // then mark corresponding cells to zero except the 1st row and col so start from 2nd row and col
+            for (int i = 1; i < matrix.Length; i++)
+            {
+                for (int j = 1; j < matrix[0].Length; j++)
+                {
+                    if (matrix[i][0] == 0 || matrix[0][j] == 0)
+                    {
+                        matrix[i][j] = 0;
+                    }
+                }
+            }
+            // now for the 1st col if the bool value set mark all the cells to zero
+            if (has1stColZero)
+            {
+                for (int i = 0; i < matrix.Length; i++)
+                {
+                    matrix[i][0] = 0;
+                }
+            }
+            // now for the 1st row if the bool value set mark all the cells to zero
+            if (has1stRowZero)
+            {
+                for (int j = 0; j < matrix[0].Length; j++)
+                {
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+        /// <summary>
+        /// https://leetcode.com/problems/subarray-sum-equals-k/
+        /// Similar to LongestSubarraySum() in Array_Easy
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public int SubarraySum(int[] nums, int k)
+        {
+            int prefixSum = 0, count = 0;
+            Dictionary<int, int> dict = new();
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                prefixSum += nums[i];
+
+                if (prefixSum == k)
+                {
+                    count++;
+                }
+                if (dict.ContainsKey(prefixSum - k))
+                {
+                    count += dict[prefixSum - k];
+                }
+                if (!dict.ContainsKey(prefixSum))
+                {
+                    dict.Add(prefixSum, 1);
+                }
+                else
+                {
+                    dict[prefixSum]++;
+                }
+            }
+            return count;
         }
     }
 }

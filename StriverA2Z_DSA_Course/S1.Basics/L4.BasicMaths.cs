@@ -8,14 +8,16 @@
         /// <param name="n"></param>
         public int CountDigits(int n)
         {
-            int count = (int)Math.Log10(n) + 1;
-            // while (n > 0)
-            // {
-            //     int lastDigit = n % 10;
-            //     Console.WriteLine(lastDigit);
-            //     count++;
-            //     n = n / 10;
-            // }
+            int count = 0;
+            // inbuilt function which we can use instead of that while loop
+            // count = (int)Math.Log10(n) + 1;
+            while (n > 0)
+            {
+                int lastDigit = n % 10;
+                Console.WriteLine(lastDigit);
+                count++;
+                n = n / 10;
+            }
             return count;
         }
         /// <summary>
@@ -73,7 +75,7 @@
         public void PrintDivisors(int n)
         {
             List<int> list = new();
-            // i <= Math.Sqrt(n) => i * i <= n => sqrt is nothing but (i * i) / 2
+            // i <= Math.Sqrt(n) => i * i <= n => sqrt is nothing but (i * i) / i
             //O(sqrt(n))
             for (int i = 1; i * i <= n; i++)
             {

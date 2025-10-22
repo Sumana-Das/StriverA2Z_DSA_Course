@@ -359,6 +359,7 @@ namespace StriverA2Z_DSA_Course.S4.BinarySearch
         }
         /// <summary>
         /// https://leetcode.com/problems/find-peak-element/
+        /// This is in 1D array
         /// </summary>
         /// this is almost same as [SingleNonDuplicate]https://leetcode.com/problems/single-element-in-a-sorted-array/
         /// <param name="nums"></param>
