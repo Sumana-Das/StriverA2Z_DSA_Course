@@ -78,5 +78,96 @@ namespace StriverA2Z_DSA_Course.S5.Strings
             }
             return "";
         }
+        /// <summary>
+        /// https://leetcode.com/problems/longest-common-prefix/
+        /// </summary>
+        /// <param name="strs"></param>
+        /// <returns></returns>
+        public string LongestCommonPrefix(string[] strs)
+        {
+            Array.Sort(strs);
+
+            string s1 = strs[0];
+            string s2 = strs[strs.Length - 1];
+            int idx = 0;
+
+            while (idx < s1.Length)
+            {
+                if (s1[idx] == s2[idx])
+                {
+                    idx++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return s1.Substring(0, idx);
+        }
+        /// <summary>
+        /// https://leetcode.com/problems/isomorphic-strings/
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public bool IsIsomorphic(string s, string t)
+        {
+            Dictionary<char, char> dict1 = new();
+            Dictionary<char, char> dict2 = new();
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (!dict1.ContainsKey(s[i]))
+                {
+                    dict1.Add(s[i], t[i]);
+                }
+                if (!dict2.ContainsKey(t[i]))
+                {
+                    dict2.Add(t[i], s[i]);
+                }
+                if (dict1[s[i]] != t[i] || dict2[t[i]] != s[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        /// <summary>
+        /// https://leetcode.com/problems/valid-anagram/
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public bool IsAnagram(string s, string t)
+        {
+            if (s.Length != t.Length)
+                return false;
+
+            Dictionary<char, int> dict = new();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (!dict.ContainsKey(s[i]))
+                {
+                    dict.Add(s[i], 1);
+                }
+                else
+                {
+                    dict[s[i]]++;
+                }
+            }
+            foreach (char i in t)
+            {
+                if (dict.ContainsKey(i))
+                {
+                    if (dict[i] > 1)
+                        dict[i]--;
+                    else
+                        dict.Remove(i);
+                }
+            }
+
+            return dict.Count == 0;
+        }
     }
 }
