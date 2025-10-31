@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StriverA2Z_DSA_Course.S5.Strings
 {
-    class S18
+    class String_Hard
     {
     }
 }

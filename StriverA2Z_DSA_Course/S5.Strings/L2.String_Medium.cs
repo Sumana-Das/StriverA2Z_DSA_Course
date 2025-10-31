@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StriverA2Z_DSA_Course.S5.Strings
 {
-    public class L2
+    public class String_Medium
     {
         /// <summary>
         /// https://leetcode.com/problems/sort-characters-by-frequency/
